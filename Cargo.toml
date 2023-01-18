@@ -1,0 +1,17 @@
+[package]
+name = "studium"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+actix-web = "4"
+toml = "0.5.10"
+serde = "1.0.152"
+serde_derive = "1.0.152"
+
+
+# dev-tools deps
+local-ip-address = "0.5.1"
+fast_qr = "0.7.0"
