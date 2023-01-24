@@ -1,0 +1,59 @@
+@font-face {
+    font-family: Roboto;
+    src: url("/static/fonts/Roboto-Medium.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("/static/fonts/Roboto-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("/static/fonts/Roboto-Black.ttf");
+    font-weight: 900;
+}
+
+
+.subject-item {
+    transition: .3s;
+}
+.subject-item:hover {
+    border-bottom: solid 0.25rem #82b28e;
+}
+
+.stu-bg-green-1{
+    background-color:#82b28e;
+}
+
+.f-roboto {
+    font-family: 'Roboto';
+    font-weight: normal;
+}
+
+.f-roboto-bold {
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+
+.f-roboto-black {
+    font-family: 'Roboto';
+    font-weight: 900;
+}
+
+.f-size-huge {
+    font-size: calc(4.5vw + 2rem);
+}
+
+.f-size-big {
+    font-size: calc(4.5vw + 1rem);
+}
+
+@media only screen and (max-width: 600px) {
+    .f-m-size-big {
+        font-size: calc(4.5vw + 1rem);
+    }
+}
+

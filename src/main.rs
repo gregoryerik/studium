@@ -3,6 +3,7 @@ mod routes;
 mod config;
 
 use actix_web::{App, HttpServer};
+use actix_files as fs;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -15,7 +16,9 @@ async fn main() -> std::io::Result<()> {
 
     println!("Running server...");
 
-    HttpServer::new(|| App::new().service(routes::index).service(routes::hello))
+    HttpServer::new(|| App::new()
+        .service(fs::Files::new("/static", "./templates/static").show_files_listing())
+        .service(routes::index).service(routes::hello))
         .bind((server.ip, server.port))?
         .run()
         .await

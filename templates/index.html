@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/cirrus.min.css">
+    <link rel="stylesheet" href="/static/extra.css">
+    <title>Studium</title>
+    <script src="/static/load.js"></script>
+</head>
+
+<body>
+
+    <div class="header u-unselectable header-animated header-clear m-0">
+        <div class="header-brand">
+            <div class="nav-item no-hover">
+                <img src="/static/images/letter-s.png" alt="Studium" width="32px" height="32px">
+            </div>
+            <div class="nav-item nav-btn" id="header-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="header-nav" id="header-menu">
+            <div class="nav-right">
+                <div class="nav-item f-m-size-big">
+                    <a href="#">Dashboard</a>
+                </div>
+                <div class="nav-item f-m-size-big">
+                    <a href="#">Settings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div class="hero-body">
+            <div class="content">
+                <h5 class="f-roboto-black f-size-huge"><span id="greeting_span"></span>, {{ name }} 👋</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="pl-4">
+        <h5 class="text-gray-700 f-size-big">Subjects</h5>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="frame">
+                <div class="frame__header">
+                </div>
+
+                <div class="frame__body bg-gray-200 subject-item" style="padding: 1rem; margin: 1rem">
+                    <div class="frame__title u-text-center ">
+                        <h4 class="f-roboto-black">German</h4>
+                    </div>
+                    <div class="frame__subtitle u-text-center">
+                        Insert any component here, including a frame navigation menu using<!-- -->
+                        <code>frame-nav</code>. The frame will auto-expand and if a specific height is set, a scrollbar
+                        will appear
+                        to take care of overflow.
+                    </div>
+
+                </div>
+                <div class="frame__footer"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-green-200 u-fixed u-round-full" width="30px" height="30px"></div>
+
+
+    <script>
+        set_greeting_text();
+
+        // Get all the nav-btns in the page
+        let navBtns = document.querySelectorAll('.nav-btn');
+
+        // Add an event handler for all nav-btns to enable the dropdown functionality
+        navBtns.forEach(function (ele) {
+            ele.addEventListener('click', function() {
+                // Get the dropdown-menu associated with this nav button (insert the id of your menu)
+                let dropDownMenu = document.getElementById('header-menu');
+
+                // Toggle the nav-btn and the dropdown menu
+                ele.classList.toggle('active');
+                dropDownMenu.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
