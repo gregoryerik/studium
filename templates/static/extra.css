@@ -21,11 +21,16 @@
     transition: .3s;
 }
 .subject-item:hover {
-    border-bottom: solid 0.25rem #82b28e;
+    border-bottom: solid 0.4rem #82b28e;
+    border-right: solid 0.4rem #82b28e;
 }
 
 .stu-bg-green-1{
     background-color:#82b28e;
+}
+
+.stu-bg-green-2 {
+    background-color: #43544c;
 }
 
 .f-roboto {
@@ -44,16 +49,20 @@
 }
 
 .f-size-huge {
-    font-size: calc(4.5vw + 2rem);
+    font-size: calc(4.5vw + 1rem);
 }
 
 .f-size-big {
-    font-size: calc(4.5vw + 1rem);
+    font-size: calc(4.5vw + 0.5rem);
 }
 
 @media only screen and (max-width: 600px) {
     .f-m-size-big {
         font-size: calc(4.5vw + 1rem);
+    }
+
+    .f-size-huge {
+        font-size: calc(4.5vw + 2rem);
     }
 }
 
