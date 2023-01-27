@@ -16,6 +16,24 @@
     font-weight: 900;
 }
 
+@font-face {
+    font-family: "SourceCodePro";
+    src: url("/static/fonts/SourceCodePro-Medium.ttf");
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "SourceCodePro";
+    src: url("/static/fonts/SourceCodePro-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "SourceCodePro";
+    src: url("/static/fonts/SourceCodePro-Black.ttf");
+    font-weight: 900;
+}
+
 
 .subject-item {
     transition: .3s;
@@ -48,6 +66,21 @@
     font-weight: 900;
 }
 
+.f-sourcecode {
+    font-family: "SourceCodePro";
+    font-weight: normal;
+}
+
+.f-sourcecode-bold {
+    font-family: "SourceCodePro";
+    font-weight: 700;
+}
+
+.f-sourcecode-black {
+    font-family: "SourceCodePro";
+    font-weight: 900;
+}
+
 .f-size-huge {
     font-size: calc(4.5vw + 1rem);
 }
@@ -66,3 +99,8 @@
     }
 }
 
+
+.p-tb {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}

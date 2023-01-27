@@ -12,6 +12,8 @@ pub mod file {
 
     const FILENAME: &str = "config.toml";
 
+    // Server
+
     #[derive(Deserialize)]
     struct ServerContainer {
         server: Server,
@@ -32,6 +34,8 @@ pub mod file {
         pub port: u16,
     }
 
+    // Application
+
     #[derive(Deserialize)]
     struct ApplicationContainer {
         application: Application,
@@ -40,7 +44,7 @@ pub mod file {
     impl ApplicationContainer {
         fn create_empty() -> ApplicationContainer {
             ApplicationContainer {
-                application: Application { mode: "".to_string() }
+                application: Application { mode: "".to_string(), database_path: "".to_string() }
             }
         }
     }
@@ -48,6 +52,7 @@ pub mod file {
     #[derive(Deserialize)]
     pub struct Application {
         pub mode: String,
+        pub database_path: String,
     }
 
     fn load_config_file() -> String {

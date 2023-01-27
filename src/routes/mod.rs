@@ -1,7 +1,10 @@
 use actix_web::{get, Responder, HttpResponse};
 use askama::Template;
+
+//Modules
 mod auth;
 mod templates;
+pub mod setup;
 
 
 #[get("/")]

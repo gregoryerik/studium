@@ -1,6 +1,7 @@
 mod development;
 mod routes;
 mod config;
+mod database;
 
 use actix_web::{App, HttpServer};
 use actix_files as fs;
@@ -18,7 +19,7 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| App::new()
         .service(fs::Files::new("/static", "./templates/static").show_files_listing())
-        .service(routes::index).service(routes::hello))
+        .service(routes::index).service(routes::hello).service(routes::setup::setup).service(routes::setup::database_setup))
         .bind((server.ip, server.port))?
         .run()
         .await
