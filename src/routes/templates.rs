@@ -7,5 +7,5 @@ pub struct IndexTemplate<'a> {
 }
 
 #[derive(Template)]
-#[template(path="setup-2.html")]
+#[template(path="setup.html")]
 pub struct SetupTemplate{}
