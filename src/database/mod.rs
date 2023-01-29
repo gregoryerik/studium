@@ -10,6 +10,8 @@
 
 
 pub mod local {
+    use std::fs;
+
     use crate::config;
     
     #[derive(serde::Serialize)]
@@ -36,6 +38,16 @@ pub mod local {
     
     
     }
+
+    /// Check that the SQLite file exists
+    pub fn sqlite_db_exists() -> bool {
+        let path_name = get_connection_path();
+        let exists = fs::metadata(path_name).is_ok();
+
+        exists
+    }
+
+    
 }
 
 pub mod remote {

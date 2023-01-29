@@ -19,7 +19,11 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(|| App::new()
         .service(fs::Files::new("/static", "./templates/static").show_files_listing())
-        .service(routes::index).service(routes::hello).service(routes::setup::setup).service(routes::setup::database_setup))
+        .service(routes::index)
+        .service(routes::setup::setup)
+        .service(routes::setup::database_setup)
+        .service(routes::api::json::api)
+    )
         .bind((server.ip, server.port))?
         .run()
         .await
