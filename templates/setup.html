@@ -9,7 +9,13 @@
     <link rel="stylesheet" href="/static/cirrus.min.css">
     <link rel="stylesheet" href="/static/extra.css">
     <title>Studium</title>
-    <script src="/static/load.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $.getScript("/static/js/setup_load.js");
+        });
+    </script>
 </head>
 
 <body>
@@ -32,7 +38,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-control">
-                            <input type="text" name="" id="" placeholder="Name">
+                            <input type="text" name="name_input" id="name_input" placeholder="Name" >
                         </div>
                     </div>
                 </div>
@@ -40,7 +46,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-control">
-                            <input type="email" name="" id="" placeholder="Email">
+                            <input type="email" name="email_input" id="email_input" placeholder="Email" >
                         </div>
                     </div>
                 </div>
@@ -54,8 +60,8 @@
                         </div>
 
                         <div class="form-ext-control form-ext-radio">
-                            <input id="check-remote" class="form-ext-input form-ext-input--dark" type="radio" name="databaseRadio" />
-                            <label class="form-ext-label"  for="check-remote">Remote Database</label>
+                            <input id="check-remote" class="form-ext-input form-ext-input--dark" type="radio" name="databaseRadio" disabled />
+                            <label class="form-ext-label"  for="check-remote">Remote Database (coming soon)</label>
                         </div>
                     </div>
                 </div>
@@ -64,28 +70,16 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="input-control">
-                                <input type="text" name="" id="" placeholder="Path to SQLite DB">
+                                <input type="text" name="sql_path_input" id="sql_path_input" placeholder="Path to SQLite DB (optional)">
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="sel-remote" hidden>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="input-control">
-                                <input type="text" name="" id="" placeholder="Database URL">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
 
                 <div class="row">
                     <div class="col-12">
                         <div class="input-control u-pull-right">
-                            <input class="btn-dark" type="submit" value="Continue">
+                            <input class="btn-dark" type="submit" value="Continue" id="submit_form" disabled>
                         </div>
                     </div>
                 </div>
