@@ -4,9 +4,9 @@
 
 */
 
-use actix_web::{get, HttpResponse, Responder, web};
+use actix_web::{get, post, HttpResponse, Responder, web};
 use askama::Template;
-use serde::Serialize;
+use serde::{Serialize, Deserialize};
 
 use crate::routes::templates;
 use crate::database::local;
@@ -25,6 +25,13 @@ enum TestType {
     RE, // Read Error
 }
 
+#[derive(Serialize, Deserialize)]
+pub struct SetupData {
+    name: String,
+    email: String,
+    path: String
+} 
+
 
 #[get("/setup")]
 pub async fn setup() -> actix_web::Result<HttpResponse> {
@@ -34,7 +41,18 @@ pub async fn setup() -> actix_web::Result<HttpResponse> {
 }
 
 
+#[post("/setup")]
+pub async fn POST_setup(req: web::Json<SetupData>) -> actix_web::Result<impl Responder> {
+    let setup_data = SetupData {
+        name: req.name.to_string(),
+        email: req.email.to_string(),
+        path: req.path.to_string()        
+    };
 
+    Ok(HttpResponse::Created()
+    .content_type("application/json")
+    .body(serde_json::to_string(&setup_data).unwrap()))
+}
 
 // DBT -> Database test
 #[get("/setup/dbt/{test}")] 

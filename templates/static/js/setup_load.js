@@ -32,4 +32,25 @@ function update_button() {
         $("#submit_form").prop("disabled", true)
     }
 }
-/// on_load()
+
+function submit_setup_form() {
+    let form_data = {
+        "name": $("#name_input").val(),
+        "email": $("#email_input").val(),
+        "path": $("#sql_path_input").val(),
+
+    };
+
+    const url = location.origin + "/setup";
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: form_data,
+        success: function(){
+            console.log("Yay")
+        },
+        dataType: "json",
+        contentType : "application/json"
+      });
+
+}

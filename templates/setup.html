@@ -32,7 +32,7 @@
 
     <div class="row u-no-wrap w-60p-md u-center">
         <div class="col-12">
-            <form action="/setup" method="post" >
+            <form id="setup_form">
 
                 <h5 class="f-sourcecode pt-2">// Your Details</h5>
                 <div class="row">
@@ -52,25 +52,12 @@
                 </div>
 
                 <h5 class="f-sourcecode pt-2">// Database Details</h5>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="form-ext-control form-ext-radio">
-                            <input id="check-local" class="form-ext-input form-ext-input--dark" type="radio" name="databaseRadio" checked/>
-                            <label class="form-ext-label" for="check-local">Local Database</label>
-                        </div>
-
-                        <div class="form-ext-control form-ext-radio">
-                            <input id="check-remote" class="form-ext-input form-ext-input--dark" type="radio" name="databaseRadio" disabled />
-                            <label class="form-ext-label"  for="check-remote">Remote Database (coming soon)</label>
-                        </div>
-                    </div>
-                </div>
 
                 <div id="sel-local">
                     <div class="row">
                         <div class="col-12">
                             <div class="input-control">
-                                <input type="text" name="sql_path_input" id="sql_path_input" placeholder="Path to SQLite DB (optional)">
+                                <input type="text" name="path_input" id="sql_path_input" placeholder="Path to SQLite DB (optional)">
                             </div>
                         </div>
                     </div>
@@ -79,7 +66,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="input-control u-pull-right">
-                            <input class="btn-dark" type="submit" value="Continue" id="submit_form" disabled>
+                            <button class="btn-dark" id="submit_form" onclick="submit_setup_form()" disabled>Continue</button>
                         </div>
                     </div>
                 </div>
