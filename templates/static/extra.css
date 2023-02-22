@@ -89,6 +89,10 @@
     font-size: calc(4.5vw + 0.5rem);
 }
 
+.f-size-lg {
+    font-size: 3em;
+}
+
 @media only screen and (max-width: 600px) {
     .f-m-size-big {
         font-size: calc(4.5vw + 1rem);

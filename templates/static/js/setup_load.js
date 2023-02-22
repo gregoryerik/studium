@@ -4,8 +4,6 @@ function on_load() {
     $.get(url, function(data, _status) {
         let name = data['name'];
         let value = data['value'];
-
-
     })   
 }
 
@@ -37,8 +35,7 @@ function submit_setup_form() {
     let form_data = {
         "name": $("#name_input").val(),
         "email": $("#email_input").val(),
-        "path": $("#sql_path_input").val(),
-
+        "path": $("#sql_path_input").val()
     };
 
     const url = location.origin + "/setup";
@@ -47,7 +44,7 @@ function submit_setup_form() {
         url: url,
         data: form_data,
         success: function(){
-            console.log("Yay")
+            alert("Yay!");
         },
         dataType: "json",
         contentType : "application/json"

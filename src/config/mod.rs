@@ -107,9 +107,23 @@ pub mod file {
         else {
             exit(0);
         }
-        
+    }
 
-        
+    pub fn write_application_config(app_config: Application) {
+        // get entire toml file
+        let toml_file = super::file::load_config_file();
+        let mut parsed_toml: toml::Value = toml_file.parse().expect("Failed to parse TOML");
 
+        //create the application table
+        let mut app_table = toml::value::Table::new();
+        app_table.insert("database_path".to_string(), toml::Value::from(app_config.database_path));
+        app_table.insert("mode".to_string(), toml::Value::from(app_config.mode));
+
+        // save these values to the table var
+        parsed_toml.as_table_mut().unwrap().insert("application".to_string(), toml::Value::from(app_table));
+
+        //write to file
+        let toml_str = toml::to_string_pretty(&parsed_toml).unwrap();
+        fs::write(FILENAME, toml_str).expect("Failed to write to file");
     }
 }

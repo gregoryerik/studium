@@ -4,12 +4,16 @@
 
 */
 
-use actix_web::{get, post, HttpResponse, Responder, web};
+use actix_web::{get, post, HttpResponse, Responder, web, HttpRequest};
 use askama::Template;
 use serde::{Serialize, Deserialize};
 
 use crate::routes::templates;
 use crate::database::local;
+
+use self::verify::Codes;
+
+mod verify;
 
 
 #[derive(Serialize)]
@@ -25,12 +29,17 @@ enum TestType {
     RE, // Read Error
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct SetupData {
-    name: String,
-    email: String,
-    path: String
+    name_input: String,
+    email_input: String,
+    sql_path_input: String
 } 
+
+#[derive(Serialize, Deserialize)]
+pub struct SetupDataContainer {
+    data: SetupData
+}
 
 
 #[get("/setup")]
@@ -42,16 +51,60 @@ pub async fn setup() -> actix_web::Result<HttpResponse> {
 
 
 #[post("/setup")]
-pub async fn POST_setup(req: web::Json<SetupData>) -> actix_web::Result<impl Responder> {
-    let setup_data = SetupData {
-        name: req.name.to_string(),
-        email: req.email.to_string(),
-        path: req.path.to_string()        
+async fn post_setup(_req: HttpRequest, params: web::Form<SetupData>) -> impl Responder {
+    // Creating the safe SetupData
+
+    let mut safe_data = SetupData{
+        name_input: params.name_input.clone(), // this instead of string new because then dont need match arm to write
+        email_input: String::new(),
+        sql_path_input: String::new()
     };
 
-    Ok(HttpResponse::Created()
-    .content_type("application/json")
-    .body(serde_json::to_string(&setup_data).unwrap()))
+    // verifying the values
+
+    //Check name
+    let vf_name = verify::verify_name(safe_data.name_input.clone());
+
+    match vf_name {
+        Codes::MODIFY(val) => {
+            // needs to be updated with the safe version
+            safe_data.name_input = val;
+        },
+        _ => {}
+    }
+
+    // Check email. Only allow the modified version
+    let vf_email = verify::verify_email(params.email_input.clone());
+
+    match vf_email {
+        Codes::MODIFY(val) => {
+            safe_data.email_input = val;
+        },
+        Codes::REJECT => {
+            // No need to go any further. The email is being rejected. Return back to verify page
+            return HttpResponse::NotAcceptable().content_type("text/javascript").body("Error with email")
+        },
+        _ => {}
+    }
+
+    let vf_path = verify::verify_sql_path(params.sql_path_input.clone());
+
+    match vf_path {
+        Codes::ALLOW => {
+            safe_data.sql_path_input = params.sql_path_input.clone();
+        },
+        Codes::MODIFY(val) => {
+            safe_data.sql_path_input = val;
+        }
+        _ => {
+            return HttpResponse::NotAcceptable().content_type("text/javascript").body("Error with path")
+        }
+    }
+
+    HttpResponse::Ok()
+        .content_type("text/javascript")
+        .body(format!("Data returned {:?}", safe_data))
+
 }
 
 // DBT -> Database test

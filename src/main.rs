@@ -22,7 +22,7 @@ async fn main() -> std::io::Result<()> {
         .service(routes::index)
         .service(routes::setup::setup)
         .service(routes::setup::database_setup)
-        .service(routes::setup::POST_setup)
+        .service(routes::setup::post_setup)
         .service(routes::api::json::api)
     )
         .bind((server.ip, server.port))?

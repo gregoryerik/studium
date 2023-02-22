@@ -8,13 +8,21 @@
 
 */
 
-use crate::config;
+use crate::config::{self, file::Application};
 
 fn get_db_path() -> String {
     let config_data = config::file::get_application_config();
     let path = config_data.database_path.to_owned();
     
     path
+}
+
+pub fn set_db_path(path: String) {
+    let original = config::file::get_application_config();
+    config::file::write_application_config(Application {
+        mode: original.mode, // keeping the same mode
+        database_path: path
+    });
 }
 
 
