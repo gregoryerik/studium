@@ -103,7 +103,7 @@ async fn post_setup(_req: HttpRequest, params: web::Form<SetupData>) -> impl Res
 
     HttpResponse::Ok()
         .content_type("text/javascript")
-        .body(format!("Data returned {:?}", safe_data))
+        .body(format!("Data returned {:#?}", safe_data))
 
 }
 

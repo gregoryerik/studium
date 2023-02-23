@@ -7,7 +7,7 @@
 
 use regex::Regex;
 
-use crate::{database::{self, local::ConnectionStatus}, config};
+use crate::database::{self, local::ConnectionStatus};
 
 pub enum Codes {
     ALLOW,
