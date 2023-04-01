@@ -11,6 +11,14 @@ use mysql::{Pool, PooledConn, params, Opts, OptsBuilder};
 use r2d2::Pool as R2D2Pool;
 use r2d2_mysql::MySqlConnectionManager;
 
+extern crate dotenv;
+
+use dotenv::dotenv;
+use std::env;
+
+#[macro_use]
+extern crate dotenv_codegen;
+
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     let server = config::file::get_server_config();
@@ -21,7 +29,7 @@ async fn main() -> std::io::Result<()> {
 
     //business::drops::scrape_drops_language("german").await;
 
-    let url: &str = "mysql://7njcpzhr946xitddftib:pscale_pw_FlYPDt79ZkWI7yof9pWQqxR8t31hQT3wPcOqerZM2pi@aws.connect.psdb.cloud/studium";
+    let url: &str = dotenv!("new_url");
 
     let opts  = Opts::from_url(url).unwrap();
     
