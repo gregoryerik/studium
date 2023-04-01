@@ -15,6 +15,11 @@ askama = "0.11.1"
 sqlite = "0.30.3"
 serde_json = "1.0.92"
 regex = "1.7.1"
+scraper = "0.15.0"
+reqwest = {version = "0.11.15", features = ["blocking"]}
+mysql = "23.0.1"
+r2d2 = "0.8.10"
+r2d2_mysql = "23.0.0"
 
 # dev-tools deps
 local-ip-address = "0.5.1"

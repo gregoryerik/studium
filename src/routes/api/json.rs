@@ -1,7 +1,8 @@
-use actix_web::{get, Responder, web};
+use actix_web::{get, Responder, web::{self, Data}, HttpResponse};
+use mysql::{prelude::Queryable, params};
 use serde::Serialize;
 
-use crate::database::local;
+use crate::{database::local, business::{collections::{self, Group}, planet}};
 
 
 /// All of the api routes that could be requested. Enum through here to match to the correct function
@@ -65,4 +66,30 @@ fn unknown_request() -> web::Json<Info> {
             value: "unknown request".to_string()
         }
     )
+}
+
+
+// other
+
+#[get("/api/groups/all")]
+pub async fn get_groups(pool: web::Data<r2d2::Pool<r2d2_mysql::MySqlConnectionManager>>) -> impl Responder {
+    
+    let mut conn = pool.get().unwrap();
+    let query_result = conn.query_map("select * from groups", |(id, collectibles, name)|{
+        Group {id, collectibles, name}
+    });
+
+    match query_result {
+        Ok(rows) => {
+            HttpResponse::Ok()
+            .content_type("application/json")
+            .json(rows)
+        },
+        Err(e) => {
+            // Handle query error
+            HttpResponse::InternalServerError().body(format!("Error querying database: {:?}", e))
+        }
+    }
+
+    
 }
