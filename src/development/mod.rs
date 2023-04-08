@@ -37,6 +37,14 @@ pub mod machine {
             Err(e) => println!("{:?}", e),
         };
     }
+
+    pub fn get_server_url() -> String {
+        let ip_addr = get_ip_addr();
+        let url = format!("http://{}:8080/", ip_addr);
+
+        url
+
+    }
 }
 
 

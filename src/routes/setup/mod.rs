@@ -8,7 +8,7 @@ use actix_web::{get, post, HttpResponse, Responder, web, HttpRequest};
 use askama::Template;
 use serde::{Serialize, Deserialize};
 
-use crate::routes::templates;
+use crate::routes::template_models;
 use crate::database::local;
 
 use self::verify::Codes;
@@ -44,7 +44,7 @@ pub struct SetupDataContainer {
 
 #[get("/setup")]
 pub async fn setup() -> actix_web::Result<HttpResponse> {
-    let setup_template = templates::SetupTemplate {}.render().unwrap();
+    let setup_template = template_models::SetupTemplate {}.render().unwrap();
 
     Ok(HttpResponse::Ok().content_type("text/html").body(setup_template))
 }

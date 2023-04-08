@@ -29,39 +29,63 @@ function set_greeting_text() {
     }
 }
 
-function load_groups() {
+
+// instead of making a request for each group. get a tempalte to js then copy and paste onto dom with data from browser
+// takes away requests
+
+// get the template
+
+async function get_card_template() {
+    const path = '/template/ecard';
+    const url = `${window.location.protocol}//${window.location.host}${path}${name}`;
+
+    try {
+        let resp = await fetch(url);
+        let data = await resp.text();
+
+        return data;
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function get_groups() {
     const path = '/api/groups/all';
     const url = `${window.location.protocol}//${window.location.host}${path}`;
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            display_groups(data)
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-        });
+    try {
+        let resp = await fetch(url);
+        let data = await resp.json();
 
-}
-function get_card(name) {
-    const path = '/template/card/';
-    const url = `${window.location.protocol}//${window.location.host}${path}${name}`;
-    fetch(url)
-        .then(response => response.text())
-        .then(html => {
-            let element = document.getElementById("group_row");
-            element.innerHTML += html;
-        })
-        .catch(error => {
-            console.error('Error fetching HTML:', error);
-        });
-}
-function display_groups(groups) {
-    
-    groups.forEach(group => {
-        let name = group.name;
-        get_card(name);
-      });
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-load_groups()
+async function display_cards_from_template() {
+    let template = await get_card_template();
+    let data = await get_groups();
+    let root_element = document.getElementById("group_row");
+
+    data.forEach(group => {
+        let current_template = template;
+
+        let current_element = document.createElement('div');
+        current_element.innerHTML = current_template;
+
+        let title_element = current_element.querySelector('#subject_frame_title');
+        title_element.innerHTML = group.name;
+
+        root_element.innerHTML += current_element.innerHTML;
+    });
+
+}
+
+
+
+window.onload = async function () {
+    await display_cards_from_template();
+}
+

@@ -18,7 +18,6 @@ pub async fn scrape_drops_language(lang: &str) {
 }
 
 mod scrape {
-    use std::collections::HashMap;
 
     // A collection of topics under a single heading
     // e.g. food and drinks as the group with Veg, fruits, cooking etc as the topics

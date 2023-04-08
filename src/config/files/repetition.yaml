@@ -1,0 +1,23 @@
+# An array of spaced repetition intervals, where each interval represents a range of days between repetitions
+repetitions:
+  - number: 1
+    # The first repetition should occur within 24 hours of learning the material
+    interval: [0, 1]
+  - number: 2
+    # The second repetition should occur 2-3 days after the first repetition
+    interval: [2, 3]
+  - number: 3
+    # The third repetition should occur 7-10 days after the second repetition
+    interval: [7, 10]
+  - number: 4
+    # The fourth repetition should occur 2-3 weeks after the third repetition
+    interval: [14, 21]
+  - number: 5
+    # The fifth repetition should occur 1-2 months after the fourth repetition
+    interval: [30, 60]
+  - number: 6
+    # The sixth repetition should occur 3-6 months after the fifth repetition
+    interval: [90, 180]
+  - number: 7
+    # The seventh and final repetition should occur 1 year after the sixth repetition
+    interval: [365, 365]

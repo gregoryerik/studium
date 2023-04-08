@@ -7,7 +7,7 @@
 use actix_web::{get, HttpResponse, web};
 use askama::Template;
 
-use crate::routes::templates as tmpl;
+use crate::routes::template_models as tmpl;
  
 #[get("/template/card/{name}")]
 pub async fn card(info: web::Path<String>) -> actix_web::Result<HttpResponse> {
@@ -21,4 +21,19 @@ pub async fn card(info: web::Path<String>) -> actix_web::Result<HttpResponse> {
     }.render().unwrap();
 
     Ok(HttpResponse::Ok().content_type("text/html").body(template))
+}
+
+#[get("/template/ecard")]
+pub async fn e_card() -> actix_web::Result<HttpResponse> {
+    // returns an empty card template
+
+    let template = tmpl::SubjectFrameTemplate{
+        title: None,
+        subtitle: None,
+        deck_size: None,
+        to_update: None,
+    }.render().unwrap();
+
+    Ok(HttpResponse::Ok().content_type("text/html").body(template))
+
 }
